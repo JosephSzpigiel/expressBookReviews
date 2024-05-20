@@ -2,6 +2,7 @@ const express = require('express');
 let books = require("./booksdb.js");
 let isValid = require("./auth_users.js").isValid;
 let users = require("./auth_users.js").users;
+const axios = require("axios")
 const public_users = express.Router();
 
 
@@ -80,3 +81,27 @@ public_users.get('/review/:isbn',function (req, res) {
 });
 
 module.exports.general = public_users;
+
+//Task 10
+async function getAllBooks(){
+  const books = await axios.get('http://127.0.0.1:5000/')
+  return books
+} 
+
+//Task 11
+async function getByISBN(isbn){
+  const book = await axios.get(`http://127.0.0.1:5000/isbn/${isbn}`)
+  return book
+} 
+
+//Task 12
+async function getByAuthor(author){
+  const books = await axios.get(`http://127.0.0.1:5000/author/${author}`)
+  return books
+} 
+
+//Task 13
+async function getbyTitle(title){
+  const books = await axios.get(`http://127.0.0.1:5000/title/${title}`)
+  return books
+} 
